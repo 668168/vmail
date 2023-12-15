@@ -1,5 +1,6 @@
 from email.mime.text import MIMEText  # 文本对象
 from ._smtp_config import smtp_config
+import os
 
 
 def send_email_plaintext(_subject='', _content='', _send_from='', _to=''):
@@ -7,7 +8,7 @@ def send_email_plaintext(_subject='', _content='', _send_from='', _to=''):
     if _send_from == '':
         _send_from = os.getenv('SEND_FROM')
     if _to == '':
-        _send_to = os.getenv('SEND_TO')
+        _to = os.getenv('SEND_TO')
     if _subject == '':
         _subject = os.getenv('SUBJECT')
     if _content == '':
