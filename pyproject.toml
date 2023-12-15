@@ -1,8 +1,8 @@
 [project]
 name = "vmail"
-version = "1.0.3"
+version = "v1.0.0"
 authors = [
-  { name="668168", email="vp@668168.xyz" },
+  { name="echo404", email="vp@668168.xyz" },
 ]
 description = "A lazy email client"
 readme = "README.md"
