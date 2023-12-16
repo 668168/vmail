@@ -1,5 +1,5 @@
 # vmail
-lazy man email custom
+lazy man email custom client for python.
 
 ```plaintext
 https://daobook.github.io/packaging.python.org/tutorials/packaging-projects.html
