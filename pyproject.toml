@@ -1,6 +1,6 @@
 [project]
 name = "vmail"
-version = "v1.0.0"
+version = "1.0.1"
 authors = [
   { name="echo404", email="vp@668168.xyz" },
 ]

@@ -8,6 +8,8 @@ from email.mime.image import MIMEImage  # 图片对象
 from email.mime.audio import MIMEAudio  # 音频对象
 from email.utils import formatdate  # 设置邮件时间
 from email.header import Header
+import email.utils
+
 
 from ._smtp_config import smtp_config
 
@@ -39,6 +41,11 @@ def send_email_multimedia(_subject='no subject', _content='', _image='', _attach
     # message['Cc']      = ';'.join         (CC_RECIPIENTS) # 抄送人
     message['To'] = 'fanpengtao@gmail.com'  # 收件人'1@gmail.com;1@189.cn;1@139.com;1@qq.com'
     # message['Date'] = formatdate()  # 邮件时间               ，可以不用加
+
+    # 创建一个唯一的Message-ID
+    # 没这个id, 会导致gsuite接收block: Messages missing a valid Message-ID header
+    msg_id = email.utils.make_msgid(domain='cfpod.com')
+    msg['Message-ID'] = msg_id
 
     # -----------------------   step2. 配置邮件正文    ------------------------
     times = time.strftime("%Y%m%dT%H%M%S%z", time.localtime())

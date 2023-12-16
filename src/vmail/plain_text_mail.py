@@ -1,5 +1,6 @@
 from email.mime.text import MIMEText  # 文本对象
-from ._smtp_config import smtp_config
+import email.utils
+from _smtp_config import smtp_config
 import os
 
 
@@ -20,6 +21,11 @@ def send_email_plaintext(_subject='', _content='', _send_from='', _to=''):
     msg['From'] = _send_from  # 发件人
     msg['To'] = _to  # 收件人
 
+    # 创建一个唯一的Message-ID
+    # 没这个id, 会导致gsuite接收block: Messages missing a valid Message-ID header
+    msg_id = email.utils.make_msgid(domain='cfpod.com')
+    msg['Message-ID'] = msg_id
+
     # -----------------------   step3. 配置一个SMTP对象   -----------------------
     smtp_config(msg)
 
@@ -33,10 +39,11 @@ if __name__ == '__main__':
     import os
     from dotenv import load_dotenv
 
-    if not os.path.exists('../tokens/.env'):
-        logger.error('tokens/.env not exists')
+    env_path = r'D:\code\PandoraNextTokenGenerate\tokens\.env'
+    if not os.path.exists(env_path):
+        logger.error(f'{env_path} not exists')
         exit(1)
-    load_dotenv(dotenv_path='../tokens/.env')
+    load_dotenv(dotenv_path=env_path)
     send_from = os.getenv("SEND_FROM")
     send_to = os.getenv('SEND_TO')
     content = f'the test test content'
