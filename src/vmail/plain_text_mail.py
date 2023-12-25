@@ -1,6 +1,6 @@
 from email.mime.text import MIMEText  # 文本对象
 import email.utils
-from _smtp_config import smtp_config
+from ._smtp_config import smtp_config
 import os
 
 
